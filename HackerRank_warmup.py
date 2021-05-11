@@ -98,13 +98,23 @@ def minimumBribes(q):
 
 def minimumSwaps(arr):
     min_swaps = 0
-    for i, v in enumerate(arr):
-        if i == v - 1:
+    correct_index = 0
+    # iterate through the array
+    for i in range(len(arr)):
+        # it is in the right place, thus continue
+        if i + 1 == arr[i]:
             continue
         else:
-            arr[v - 1], arr[i] = v, arr[v - 1]
-            min_swaps += 1
-    print(arr)
+            # when they are not equal
+            while arr[i] != i + 1:
+                # the index that corresponds to the value arr[i] is:
+                correct_index = arr[i] - 1
+                # make the swap
+                arr[correct_index], arr[i] = arr[i], arr[correct_index]
+                min_swaps += 1
+                # now on the position i the value that was previously on position correct, is placed
+                # we continue swap until the chain of swaps initiated by i are resolved.
+
     return min_swaps
     
 # This solution timed out    
@@ -137,6 +147,18 @@ def arrayManipulation(n, queries):
         sum_so_far += e
         max_element = max(max_element, sum_so_far)
     return max_element
+
+# Practice Section
+def compareTriplets(a, b):
+    scores = 2 * [0]
+    tasks_n = len(a)
+    for i in range(tasks_n):
+        if a[i] > b[i]:
+            scores[0] += 1
+        elif a[i] < b[i]:
+            scores[1] += 1
+    return scores     
+
 #---------------  Testing -----------------
 # Warm up
 steps = jumping_on_clouds([0,0,1,0,0,1,0])
@@ -181,3 +203,8 @@ minimumBribes(q)
 arr = [4, 3, 1, 2]
 min_swaps = minimumSwaps(arr)
 print(min_swaps)
+
+alice = [5, 6, 7]
+bob = [3, 6, 10]
+scores = compareTriplets(alice, bob)
+print(scores)
