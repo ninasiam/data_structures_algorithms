@@ -159,6 +159,38 @@ def compareTriplets(a, b):
             scores[1] += 1
     return scores     
 
+def checkIfExist(arr) -> bool:
+    mults = []
+    zeros = 0
+    for i in range(len(arr)):
+        if arr[i] % 2 == 0 or arr[i] != 0:
+            mults.append(arr[i] // 2) 
+        elif arr[i] == 0:
+            zeros += 1
+    idxs = list(filter(lambda x: x in mults, arr))
+    if zeros > 1:
+        return True
+    if idxs:
+        return True
+    else:
+        return False
+
+def validMountainArray(arr) -> bool:
+    peak = False
+    if len(arr) > 2:
+        i = 0
+        while i < len(arr) - 1:
+            if arr[i] == arr[i + 1]:
+                return False
+            if (arr[i] > arr[i + 1]) and (peak == False):
+                if i > 0:
+                    peak = True
+                else:
+                    return False
+            if arr[i] < arr[i + 1] and peak == True:
+                return False
+            i += 1
+        return (True and peak)
 #---------------  Testing -----------------
 # Warm up
 steps = jumping_on_clouds([0,0,1,0,0,1,0])
@@ -208,3 +240,9 @@ alice = [5, 6, 7]
 bob = [3, 6, 10]
 scores = compareTriplets(alice, bob)
 print(scores)
+
+result = checkIfExist([0, 0])
+print(result)
+
+result = validMountainArray([9,8,7,6,5,4,3,2,1,0])
+print(result)
