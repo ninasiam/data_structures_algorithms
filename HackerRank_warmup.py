@@ -191,6 +191,63 @@ def validMountainArray(arr) -> bool:
                 return False
             i += 1
         return (True and peak)
+        
+# Hit runtime error in some test cases
+# this is anticipated since for very large inputs 
+# the recursion is !forbided!
+def queensAttack(n, k, r_q, c_q, obstacles):
+    visitedSquares = 0
+    def moveSquares(n, k, i, j, obstacles):
+        # check the bounds and the obstacles
+        nonlocal visitedSquares
+        if 0 >= i or n < i or 0 >= j or n < j: # out of bounds
+            return 
+        if [i, j] in obstacles:              # the current i,j pos is contained in obstacles
+            return 
+        # move to the board
+        if i != r_q and j != c_q:            # we move  diagonally
+            if i > r_q:
+                if j > c_q:                  # up right
+                    visitedSquares += 1
+                    moveSquares(n, k, i + 1, j + 1, obstacles) 
+                else:           
+                    visitedSquares += 1             # down right
+                    moveSquares(n, k, i + 1, j - 1, obstacles) 
+            else:
+                if j > c_q:                  # up left
+                    visitedSquares += 1
+                    moveSquares(n, k, i, j + 1, obstacles) 
+                else:                        # down lrft
+                    visitedSquares += 1
+                    moveSquares(n, k, i, j - 1, obstacles) 
+        if i == r_q:                         # we move up/down
+            if j > c_q:
+                visitedSquares += 1
+                moveSquares(n, k, i, j + 1, obstacles) 
+            else:
+                visitedSquares += 1
+                moveSquares(n, k, i, j - 1, obstacles) 
+ 
+        if j == c_q:                        # we move left/right
+            if i > c_q:
+                visitedSquares += 1
+                moveSquares(n, k, i + 1, j, obstacles) 
+            else:
+                visitedSquares += 1
+                moveSquares(n, k, i - 1, j, obstacles) 
+        return 
+                                
+    moveSquares(n, k, r_q + 1, c_q, obstacles)
+    moveSquares(n, k, r_q - 1, c_q, obstacles)
+    moveSquares(n, k, r_q, c_q + 1, obstacles)
+    moveSquares(n, k, r_q, c_q - 1, obstacles)
+    moveSquares(n, k, r_q + 1, c_q + 1, obstacles)
+    moveSquares(n, k, r_q + 1, c_q - 1, obstacles)
+    moveSquares(n, k, r_q - 1, c_q + 1, obstacles)
+    moveSquares(n, k, r_q - 1, c_q - 1, obstacles)
+    
+    return visitedSquares
+ 
 #---------------  Testing -----------------
 # Warm up
 steps = jumping_on_clouds([0,0,1,0,0,1,0])
