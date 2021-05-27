@@ -264,9 +264,7 @@ class Practice:
         return visitedSquares
 
     @staticmethod
-    def queensAttack_brute(n, k, r_q, c_q, obstacles):
-        
-        visitedSquares = 0
+    def queensAttack_brute(n, k, r_q, c_q, obstacles):   
         # limits
         up = n - r_q
         down = r_q - 1
@@ -297,25 +295,26 @@ class Practice:
             elif i_ob > r_q and j_ob > c_q:
                 if i_ob - r_q == j_ob - c_q:
                     if i_ob - r_q - 1 < up_right:
-                        up_right += i_ob - r_q - 1
+                        up_right = i_ob - r_q - 1
 
             # up left
             elif i_ob > r_q and j_ob < c_q:
                 if i_ob - r_q == c_q - j_ob:
                     if i_ob - r_q - 1 < up_left:
-                        up_left += i_ob - r_q - 1
+                        up_left = i_ob - r_q - 1
 
             # down right
             elif i_ob < r_q and j_ob > c_q:
                 if r_q - i_ob == j_ob - c_q:
                     if r_q - i_ob - 1 < down_right:
-                        down_right += r_q - i_ob - 1
+                        down_right = r_q - i_ob - 1
 
             # down left
             elif i_ob < r_q and j_ob < c_q:
-                if r_q - i_ob == j_ob - c_q:
+                if r_q - i_ob ==  c_q - j_ob:
                     if r_q - i_ob - 1 < down_left:
-                        down_left += r_q - i_ob - 1
+                        down_left = r_q - i_ob - 1
+                        
         visitedSquares = up + down + left + right + up_right + up_left + down_left + down_right
         return visitedSquares
 
