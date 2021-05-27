@@ -262,7 +262,63 @@ class Practice:
         moveSquares(n, k, r_q - 1, c_q - 1, obstacles)
         
         return visitedSquares
- 
+
+    @staticmethod
+    def queensAttack_brute(n, k, r_q, c_q, obstacles):
+        
+        visitedSquares = 0
+        # limits
+        up = n - r_q
+        down = r_q - 1
+        left = c_q - 1
+        right = n - c_q
+        up_right = min(up, right)   # the minimum of the distances that we are going
+        down_right = min(down, right)
+        up_left = min(up, left)
+        down_left = min(down, left)
+
+        for i_ob, j_ob in obstacles:
+            if r_q == i_ob:
+                if j_ob < c_q:
+                    if c_q - j_ob - 1 < left:
+                        left = c_q - j_ob -1
+                else:
+                    if j_ob - c_q - 1 < right:
+                        right = j_ob - 1 - c_q
+
+            elif c_q == j_ob:
+                if i_ob < r_q:
+                    if r_q - i_ob - 1 < down:
+                        down = r_q - i_ob -1
+                else:
+                    if i_ob - r_q - 1 < up:
+                        up = i_ob - 1 - r_q
+            # up right
+            elif i_ob > r_q and j_ob > c_q:
+                if i_ob - r_q == j_ob - c_q:
+                    if i_ob - r_q - 1 < up_right:
+                        up_right += i_ob - r_q - 1
+
+            # up left
+            elif i_ob > r_q and j_ob < c_q:
+                if i_ob - r_q == c_q - j_ob:
+                    if i_ob - r_q - 1 < up_left:
+                        up_left += i_ob - r_q - 1
+
+            # down right
+            elif i_ob < r_q and j_ob > c_q:
+                if r_q - i_ob == j_ob - c_q:
+                    if r_q - i_ob - 1 < down_right:
+                        down_right += r_q - i_ob - 1
+
+            # down left
+            elif i_ob < r_q and j_ob < c_q:
+                if r_q - i_ob == j_ob - c_q:
+                    if r_q - i_ob - 1 < down_left:
+                        down_left += r_q - i_ob - 1
+        visitedSquares = up + down + left + right + up_right + up_left + down_left + down_right
+        return visitedSquares
+
 #---------------  Testing -----------------
 def mainWarmUp():
     # Warm up
