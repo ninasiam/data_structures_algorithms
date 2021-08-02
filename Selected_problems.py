@@ -349,6 +349,60 @@ class Practice:
     def isPalindrome3(x: int) -> bool:
         return x ==  reversed(str(x))
 
+# the commplexity is on the getMin() method		
+class MinStack:
+    import sys
+    def __init__(self):
+        """
+        initialize your data structure here.
+        """
+        self.data = []
+        
+
+    def push(self, val: int) -> None:
+        self.data.append(val)
+
+    def pop(self) -> None:
+        if self.data:
+            self.data.pop()
+
+    def top(self) -> int:
+        if self.data:
+            return self.data[-1]
+
+    def getMin(self) -> int:
+        minVal =  sys.maxsize
+        queue = self.data.copy()
+        while queue:
+            minVal = min(queue.pop(), minVal)
+        return minVal
+
+class MinStack:
+    import sys
+
+    def __init__(self):
+
+	    self.data = []
+	    self.minValue = []
+        
+
+    def push(self, val: int) -> None:
+        self.data.append(val)
+        if not self.minValue or val <= self.minValue[-1]:
+            self.minValue.append(val)
+            
+
+    def pop(self) -> None:
+        if self.data:
+            if self.data.pop() == self.minValue[-1]:
+                self.minValue.pop()
+
+    def top(self) -> int:
+        if self.data:
+            return self.data[-1]
+
+    def getMin(self) -> int:
+        print(self.minValue)
 #---------------  Testing -----------------
 def mainWarmUp():
     # Warm up
