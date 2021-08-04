@@ -349,6 +349,26 @@ class Practice:
     def isPalindrome3(x: int) -> bool:
         return x ==  reversed(str(x))
 
+    @staticmethod
+    def invertTree(self, root: TreeNode) -> TreeNode:
+    
+        def dfs(root):
+            # post order
+            if not root:
+                return
+            else:
+                
+                dfs(root.left)
+                
+                dfs(root.right)
+                
+                temp = root.left
+                root.left = root.right
+                root.right = temp
+            
+        dfs(root)
+        return root
+
 # the commplexity is on the getMin() method		
 class MinStack:
     import sys
@@ -403,6 +423,8 @@ class MinStack:
 
     def getMin(self) -> int:
         print(self.minValue)
+
+
 #---------------  Testing -----------------
 def mainWarmUp():
     # Warm up
