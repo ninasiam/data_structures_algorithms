@@ -424,7 +424,24 @@ class MinStack:
     def getMin(self) -> int:
         print(self.minValue)
 
-
+def isValidBST(self, root: TreeNode) -> bool:
+    # we will traverse the tree in order 
+    res  = []
+    def inOrder(root):
+        if not root:
+            return
+        
+        inOrder(root.left)
+        res.append(root.val)
+        inOrder(root.right)
+        
+    inOrder(root)
+    
+    for i in range(len(res) - 1):
+        if res[i] >= res[i + 1]:
+            return False
+    return True
+    
 #---------------  Testing -----------------
 def mainWarmUp():
     # Warm up
