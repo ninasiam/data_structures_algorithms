@@ -441,6 +441,26 @@ def isValidBST(self, root: TreeNode) -> bool:
         if res[i] >= res[i + 1]:
             return False
     return True
+
+
+def searchBST(self, root: Optional[TreeNode], val: int) -> Optional[TreeNode]:
+    
+    def search_BinaryTree(root, val):
+        if root:
+            if root.val == val:
+                return root
+            elif root.val > val:
+                # go left
+                return search_BinaryTree(root.left, val) 
+            else:
+                # go right
+                return search_BinaryTree(root.right, val)
+        else:
+            return None
+    if root:
+        root = search_BinaryTree(root, val)
+    return root        
+            
     
 #---------------  Testing -----------------
 def mainWarmUp():
