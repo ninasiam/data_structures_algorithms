@@ -427,9 +427,11 @@ class MinStack:
 def isValidBST(self, root: TreeNode) -> bool:
     # we will traverse the tree in order 
     res  = []
+
     def inOrder(root):
+
         if not root:
-            return
+            return 
         
         inOrder(root.left)
         res.append(root.val)
@@ -461,7 +463,19 @@ def searchBST(self, root: Optional[TreeNode], val: int) -> Optional[TreeNode]:
         root = search_BinaryTree(root, val)
     return root        
             
-    
+def reverseList(self, head: Optional[ListNode]) -> Optional[ListNode]:
+    # watch out, python  user defined objects are mutable
+    if head:
+        curr, next = head, head.next
+        curr.next = None                 # head shows to None
+
+        while next:
+            tmp = next.next              # save next.next(val, pointer) to tmp in order to keep the list
+            next.next = curr             # now the pointer that points to next should now to point to curr
+            curr = next                  # to iterate to the next node
+            next = tmp                   # and now next shows to the next.next node
+
+        return curr   
 #---------------  Testing -----------------
 def mainWarmUp():
     # Warm up
