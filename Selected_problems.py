@@ -476,6 +476,18 @@ def reverseList(self, head: Optional[ListNode]) -> Optional[ListNode]:
             next = tmp                   # and now next shows to the next.next node
 
         return curr   
+
+def hasCycle(self, head: Optional[ListNode]) -> bool:
+    if not head or not head.next or not head.next.next: # empty list,list with one element, two elements
+        return False
+    else:
+        fast, slow = head, head
+        while fast and fast.next:
+            fast = fast.next.next
+            slow = slow.next
+            if fast == slow:
+                return True
+        return False
 #---------------  Testing -----------------
 def mainWarmUp():
     # Warm up
