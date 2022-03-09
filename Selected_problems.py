@@ -488,6 +488,20 @@ def hasCycle(self, head: Optional[ListNode]) -> bool:
             if fast == slow:
                 return True
         return False
+
+def plusOne(self, digits: List[int]) -> List[int]:
+    arr2str = ""
+    for d in digits:
+        arr2str += str(d)
+        
+    tmp = int(arr2str) + 1
+    
+    str2arr = str(tmp)
+    digits2 = []
+    for c in str2arr:
+        digits2.append(int(c))
+        
+    return digits2
 #---------------  Testing -----------------
 def mainWarmUp():
     # Warm up
