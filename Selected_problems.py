@@ -502,6 +502,15 @@ def plusOne(self, digits: List[int]) -> List[int]:
         digits2.append(int(c))
         
     return digits2
+    
+def strStr(self, haystack: str, needle: str) -> int:
+    if needle:
+        l = len(needle)
+        for i in range(len(haystack)):
+            if haystack[i] == needle[0]:
+                if needle == haystack[i:i+l]: # to check the whole word
+                    return i
+    return -1
 #---------------  Testing -----------------
 def mainWarmUp():
     # Warm up
