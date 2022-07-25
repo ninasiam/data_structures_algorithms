@@ -511,6 +511,18 @@ def strStr(self, haystack: str, needle: str) -> int:
                 if needle == haystack[i:i+l]: # to check the whole word
                     return i
     return -1
+
+def deleteDuplicates(self, head: Optional[ListNode]) -> Optional[ListNode]:
+    node = head
+    while node:
+        if node.next is None:
+            break
+        if node.val == node.next.val:
+            node.next = node.next.next
+        else:
+            node = node.next
+    return head
+    
 #---------------  Testing -----------------
 def mainWarmUp():
     # Warm up
