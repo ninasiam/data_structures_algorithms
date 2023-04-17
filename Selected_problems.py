@@ -160,6 +160,20 @@ class Arrays:
 
 class Practice:
     @staticmethod
+    def hasPathSumRec(root, targetSum):
+        if not root:
+            return False
+        # we are in a leaf
+        else:
+            print(root.val, targetSum)
+            if ((targetSum - root.val) != 0) and ((not root.left) and (not root.right)):
+                return False
+            elif ((targetSum - root.val) == 0) and ((not root.left) and (not root.right)):                  
+                return True
+            else:
+                return hasPathSumRec(root.left, targetSum - root.val) or hasPathSumRec(root.right, targetSum - root.val)
+
+    @staticmethod
     # Practice Section
     def compareTriplets(a, b):
         scores = 2 * [0]
